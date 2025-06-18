@@ -28,6 +28,11 @@ func (s *UserServer) GetUser(ctx context.Context, in *user.GetUserReq) (*user.Ge
 	return l.GetUser(in)
 }
 
+func (s *UserServer) CreateUser(ctx context.Context, in *user.CreateUserReq) (*user.CreateUserResp, error) {
+	l := logic.NewCreateUserLogic(ctx, s.svcCtx)
+	return l.CreateUser(in)
+}
+
 func (s *UserServer) Ping(ctx context.Context, in *user.Request) (*user.Response, error) {
 	l := logic.NewPingLogic(ctx, s.svcCtx)
 	return l.Ping(in)

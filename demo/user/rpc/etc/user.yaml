@@ -4,6 +4,15 @@ Etcd:
   Hosts:
     - 127.0.0.1:2379
   Key: user.rpc
+
+Cache:
+  - Host: 127.0.0.1
+    Type: node
+    pass:
+
 Redis:
   Host: redis:6479
   Key: userrpc
+
+Mysql:
+  DataSource: root:xin000000@tcp(127.0.0.1:3310)/user?charset=utf8mb4&parseTime=True&loc=Local
