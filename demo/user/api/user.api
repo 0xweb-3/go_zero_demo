@@ -1,5 +1,6 @@
 syntax = "v1"
 
+// goctl api go -api user.api -dir . -style gozero
 info (
 	title:   "用户服务api"
 	desc:    "用户服务api"
@@ -24,3 +25,12 @@ service User {
 	@handler getUser
 	get /user (UserReq) returns (UserResp)
 }
+
+@server (
+	middleware: LoginVerification
+)
+service User {
+	@handler getUserInfo
+	get /userinfo (UserReq) returns (UserResp)
+}
+
