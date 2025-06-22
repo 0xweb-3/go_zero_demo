@@ -3,7 +3,10 @@ module github.com/0xweb-3/go_zero_demo
 go 1.22.5
 
 require (
+	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/sony/sonyflake v1.2.1
 	github.com/zeromicro/go-zero v1.8.4
+	golang.org/x/crypto v0.33.0
 	google.golang.org/grpc v1.65.0
 	google.golang.org/protobuf v1.36.5
 )
