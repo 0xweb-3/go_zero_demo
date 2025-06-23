@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/0xweb-3/go_zero_demo/easychat/pkg/interceptor/rpcserver"
 
 	"github.com/0xweb-3/go_zero_demo/easychat/apps/user/rpc/internal/config"
 	"github.com/0xweb-3/go_zero_demo/easychat/apps/user/rpc/internal/server"
@@ -32,6 +33,7 @@ func main() {
 			reflection.Register(grpcServer)
 		}
 	})
+	s.AddUnaryInterceptors(rpcserver.LogInterceptor)
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
