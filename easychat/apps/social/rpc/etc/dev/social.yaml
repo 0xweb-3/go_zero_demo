@@ -1,9 +1,9 @@
-Name: user.rpc
-ListenOn: 0.0.0.0:10001
+Name: social.rpc
+ListenOn: 0.0.0.0:10002
 Etcd:
-  Hosts: # 这里不能使用默认127.0.0.1
+  Hosts:
     - 192.168.1.247:2379
-  Key: user.rpc
+  Key: social.rpc
 
 Cache:
   - Host: 192.168.1.247:6479
@@ -12,11 +12,7 @@ Cache:
 
 Redis:
   Host: 192.168.1.247:6479
-  Key: userrpc
+  Key: socialrpc
 
 Mysql:
   DataSource: root:xin000000@tcp(127.0.0.1:3310)/user?charset=utf8mb4&parseTime=True&loc=Local
-
-Jwt:
-  AccessSecret: 3GpqJy2cBS4UuVXFRGArdeVLt4pyQypM
-  AccessExpire: 8640000
