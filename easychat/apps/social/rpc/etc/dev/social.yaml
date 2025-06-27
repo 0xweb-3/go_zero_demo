@@ -15,4 +15,4 @@ Redis:
   Key: socialrpc
 
 Mysql:
-  DataSource: root:xin000000@tcp(127.0.0.1:3310)/user?charset=utf8mb4&parseTime=True&loc=Local
+  DataSource: root:xin000000@tcp(192.168.1.247:3310)/user?charset=utf8mb4&parseTime=True&loc=Local
