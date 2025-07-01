@@ -1,2 +1,5 @@
 Name: im.ws
 ListenOn: 0.0.0.0:10010
+
+JwtAuth:
+  AccessSecret: 3GpqJy2cBS4UuVXFRGArdeVLt4pyQypM

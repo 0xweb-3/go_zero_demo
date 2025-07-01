@@ -28,6 +28,7 @@ type Server struct {
 
 func NewServer(addr string, opts ...ServerOptions) *Server {
 	opt := NewServerOption(opts...)
+	fmt.Printf("Auth implementation type: %T\n", opt.Authentication)
 	return &Server{
 		routes:         make(map[string]HandlerFunc),
 		addr:           addr,
@@ -58,6 +59,7 @@ func (s *Server) ServerWs(w http.ResponseWriter, r *http.Request) {
 	// 连接的鉴权
 	if !s.authentication.Auth(w, r) {
 		conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprint("没有连接权限")))
+		conn.Close()
 		return
 	}
 

@@ -2,17 +2,17 @@ Name: social.rpc
 ListenOn: 0.0.0.0:10002
 Etcd:
   Hosts:
-    - 192.168.1.247:2379
+    - 192.168.21.5:2379
   Key: social.rpc
 
 Cache:
-  - Host: 192.168.1.247:6479
+  - Host: 192.168.21.5:6479
     Type: node
     pass:
 
 Redis:
-  Host: 192.168.1.247:6479
+  Host: 192.168.21.5:6479
   Key: socialrpc
 
 Mysql:
-  DataSource: root:xin000000@tcp(192.168.1.247:3310)/user?charset=utf8mb4&parseTime=True&loc=Local
+  DataSource: root:xin000000@tcp(192.168.21.5:3310)/user?charset=utf8mb4&parseTime=True&loc=Local

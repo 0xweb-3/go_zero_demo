@@ -40,7 +40,6 @@ func (l *DetailLogic) Detail(req *types.UserInfoReq) (resp *types.UserInfoResp, 
 	}
 	var res types.User
 	copier.Copy(&res, userResp.User)
-
 	return &types.UserInfoResp{
 		Info: res,
 	}, nil

@@ -20,7 +20,7 @@ func Success(data any) *Response {
 	return &Response{
 		Code: 200,
 		Msg:  "success",
-		Data: nil,
+		Data: data,
 	}
 }
 
