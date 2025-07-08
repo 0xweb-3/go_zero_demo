@@ -5,9 +5,9 @@ type FrameType uint8
 const (
 	FrameData FrameType = 0x0
 	FramePing FrameType = 0x1
+	FrameErr  FrameType = 0x9 // 错误类型 用来给前端使用
 	//FrameAck   FrameType = 0x2
 	//FrameNoAck FrameType = 0x3
-	//FrameErr   FrameType = 0x9
 
 	//FrameHeaders      FrameType = 0x1
 	//FramePriority     FrameType = 0x2
@@ -31,5 +31,12 @@ func NewMessage(fromId string, data any) *Message {
 		FrameType: FrameData,
 		FormId:    fromId,
 		Data:      data,
+	}
+}
+
+func NewErrMessage(err error) *Message {
+	return &Message{
+		FrameType: FrameErr,
+		Data:      err.Error(),
 	}
 }
