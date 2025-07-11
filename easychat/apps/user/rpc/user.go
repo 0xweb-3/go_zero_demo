@@ -26,6 +26,11 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
 
+	// 初始化内部使用全局jwt token
+	if err := ctx.SetRootToken(); err != nil {
+		panic(err)
+	}
+
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user.RegisterUserServer(grpcServer, server.NewUserServer(ctx))
 

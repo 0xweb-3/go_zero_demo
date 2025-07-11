@@ -10,9 +10,10 @@ Cache:
     Type: node
     pass:
 
-Redis:
+Redisx:
   Host: 192.168.21.5:6479
-  Key: userrpc
+  Type: node
+  pass:
 
 Mysql:
   DataSource: root:xin000000@tcp(192.168.21.5:3310)/user?charset=utf8mb4&parseTime=True&loc=Local

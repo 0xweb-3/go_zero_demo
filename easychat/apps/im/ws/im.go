@@ -26,7 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	srv := websocket.NewServer(c.ListenOn,
 		websocket.WithServerAuthentication(handler.NewJwtAuth(ctx)),
-		websocket.WithServerMaxConnectionIdle(10*time.Second),
+		websocket.WithServerMaxConnectionIdle(1000000*time.Second),
 	)
 
 	defer srv.Stop()

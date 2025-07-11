@@ -9,3 +9,15 @@ MsgChatTransfer:
   Topic: msgChatTransfer
   Offset: first
   Consumers: 1
+
+Redisx:
+  Host: 192.168.21.5:6479
+  Type: node
+  pass:
+
+Mongo:
+  Url: mongodb://root:xin-im@192.168.21.5:37017
+  Db: xin-im
+
+Ws:
+  Host: 192.168.21.5:10010

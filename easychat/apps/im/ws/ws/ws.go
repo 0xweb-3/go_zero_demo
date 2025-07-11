@@ -15,3 +15,13 @@ type Chat struct {
 	SendTime       int64              `mapstructure:"sendTime"`
 	Msg            `mapstructure:"msg"`
 }
+
+type Push struct {
+	ConversationId string             `mapstructure:"conversationId"`
+	ChatType       constants.ChatType `mapstructure:"chatType"`
+	SendId         string             `mapstructure:"sendId"`
+	RecvId         string             `mapstructure:"recvId"`
+	SendTime       int64              `mapstructure:"sendTime"`
+	MsgType        constants.MsgType  `mapstructure:"msgType"`
+	Content        string             `mapstructure:"content"`
+}
