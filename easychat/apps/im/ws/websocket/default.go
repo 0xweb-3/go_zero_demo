@@ -8,4 +8,5 @@ import (
 const (
 	// Todo 这个值需要根据实际场景调整
 	defaultMaxConnectionIdle = time.Duration(math.MaxInt64)
+	defaultAckTimeout        = 30 * time.Second
 )

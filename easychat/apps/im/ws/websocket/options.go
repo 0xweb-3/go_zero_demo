@@ -6,6 +6,10 @@ type ServerOptions func(opt *serverOption)
 
 type serverOption struct {
 	Authentication
+
+	ack        AckType
+	ackTimeOut time.Duration
+
 	Patten string
 
 	MaxConnectionIdle time.Duration
@@ -15,6 +19,7 @@ func NewServerOption(opts ...ServerOptions) serverOption {
 	o := serverOption{
 		Authentication:    new(authentication),
 		MaxConnectionIdle: defaultMaxConnectionIdle,
+		ackTimeOut:        defaultAckTimeout,
 		Patten:            "/ws",
 	}
 
@@ -33,6 +38,12 @@ func WithServerAuthentication(auth Authentication) ServerOptions {
 func WithServerPatten(patten string) ServerOptions {
 	return func(opt *serverOption) {
 		opt.Patten = patten
+	}
+}
+
+func WithServerAck(ack AckType) ServerOptions {
+	return func(opt *serverOption) {
+		opt.ack = ack
 	}
 }
 
