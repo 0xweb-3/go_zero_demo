@@ -272,7 +272,12 @@ func (s *Server) handlerWrite(conn *Conn) {
 					}, conn)
 				}
 			}
-
+			// ack消息的清理
+			if s.isAck(message) {
+				conn.messageMu.Lock()
+				delete(conn.readMessageSeq, message.Id)
+				conn.messageMu.Unlock()
+			}
 		}
 	}
 }
