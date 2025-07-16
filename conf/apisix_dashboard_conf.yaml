@@ -1,0 +1,23 @@
+conf:
+  listen:
+    host: 0.0.0.0
+    port: 9000
+
+  etcd:
+    endpoints:
+      - http://etcd:2379
+    prefix: /apisix
+
+  authentication:
+    expire_time: 3600
+    users:
+      - username: admin
+        password: "$2b$12$s9IGW9n7TCbbE2QgV6uAxeBZaM7QbORd0EPeEynxFrWSvIGRKmJe2"
+
+  log:
+    error_log:
+      level: warn
+      file_path: /usr/local/apisix-dashboard/logs/error.log
+
+    access_log:
+      file_path: /usr/local/apisix-dashboard/logs/access.log

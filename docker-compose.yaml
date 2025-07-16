@@ -6,7 +6,7 @@ services:
     container_name: gozero-etcd
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
       - ETCD_NAME=default
       - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://0.0.0.0:2380
@@ -79,6 +79,36 @@ services:
       - zookeeper
     volumes:
       - kafka-data:/bitnami/kafka
+
+  apisix:
+    image: apache/apisix:3.10.0-debian
+    container_name: gozero-apisix
+    depends_on:
+      - etcd
+    environment:
+      - APISIX_CONFIG_ETCD_HOST=http://etcd:2379
+    volumes:
+      - ./conf/apisix_config.yaml:/usr/local/apisix/conf/config.yaml:ro
+      - ./wait-for-it.sh:/wait-for-it.sh
+    ports:
+      - "9080:9080"
+      - "9443:9443"
+      - "9091:9091"
+    restart: always
+
+  apisix-dashboard:
+    image: apache/apisix-dashboard:3.0.1-alpine
+    container_name: gozero-apisix-dashboard
+    depends_on:
+      - etcd
+    ports:
+      - "9010:9000"
+    environment:
+      - RUN_MODE=release
+      - ETCD_ENDPOINTS=http://etcd:2379
+    volumes:
+      - ./conf/apisix_dashboard_conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml:ro
+    restart: always
 
 volumes:
   etcd-data:
