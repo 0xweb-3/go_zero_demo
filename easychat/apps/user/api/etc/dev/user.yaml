@@ -11,3 +11,8 @@ UserRpc:
 
 JwtAuth:
   AccessSecret: 3GpqJy2cBS4UuVXFRGArdeVLt4pyQypM
+
+Telemetry:
+  Name: user.api
+  Endpoint: http://127.0.0.1:14268/api/traces
+  Batcher: jaeger

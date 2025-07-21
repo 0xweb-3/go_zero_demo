@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.4
+    container_name: elasticsearch
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+    networks:
+      - elk
+
+  kibana:
+    image: kibana:7.17.4
+    container_name: kibana
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - '5601:5601'
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
+
+  logstash:
+    image: logstash:7.17.4
+    container_name: logstash
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./logstash/logs:/usr/share/logstash/logs
+      - ./mysql/ad16009c6861-slow.log:/var/logs/mysql-slow.log
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - "5044:5044"
+      - "50000:50000/tcp"
+      - "50000:50000/udp"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
+
+networks:
+  elk:
