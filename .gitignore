@@ -34,4 +34,4 @@ go.work.sum
 # mac
 .DS_Store
 
-/data
+*data
