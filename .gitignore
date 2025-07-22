@@ -35,3 +35,5 @@ go.work.sum
 .DS_Store
 
 *data
+
+elk/filebeat/filebeat-9.0.3-darwin-aarch64
