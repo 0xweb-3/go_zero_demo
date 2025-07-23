@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 5s  # 每15秒抓取一次指标
+
+scrape_configs:
+  - job_name: 'myapp-test'  # 定义一个任务名用于标识抓取目标
+    metrics_path: /metrics  # HTTP路径，默认是/metrics
+    static_configs:
+      - targets:
+          - 192.168.21.5:1234  # 被抓取服务的地址（IP:端口）

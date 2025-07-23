@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.28.1
+    container_name: prometheus
+    environment:
+      TZ: Asia/Shanghai  # 设置容器时区为上海
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml  # Prometheus 配置文件挂载
+      - ./prometheus/data:/prometheus  # Prometheus 数据持久化目录挂载
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'  # 指定配置文件路径
+      - '--storage.tsdb.path=/prometheus'  # 指定数据存储路径
+    restart: always  # 容器异常退出时自动重启
+    user: root  # 使用 root 用户运行
+    ports:
+      - "9090:9090"  # Prometheus Web UI 端口映射
+    networks:
+      - pr-net  # 加入自定义网络
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - ./config/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml  # 自动配置 Prometheus 数据源
+      - ./grafana/data:/var/lib/grafana  # Grafana 数据持久化目录
+    ports:
+      - "3001:3000"  # Grafana Web UI 映射到宿主机 3001 端口
+      - "10007:10007"  # 如有其他用途端口可自行定义映射
+    depends_on:
+      - prometheus  # Grafana 启动前依赖 Prometheus 先启动
+    privileged: true  # 以特权模式运行（可选，一般用于需要高级权限场景）
+    user: root  # 使用 root 用户运行
+    networks:
+      - pr-net  # 加入自定义网络
+
+# 自定义网络定义
+networks:
+  pr-net:
+    driver: bridge

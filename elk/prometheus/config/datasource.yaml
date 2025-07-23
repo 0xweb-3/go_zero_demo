@@ -1,0 +1,12 @@
+apiVersion: 1  # 配置文件的版本，当前为 v1，表示使用的是 Grafana 配置 API 的版本 1
+
+datasources:
+  - name: Prometheus  # 数据源的名称（在 Grafana 面板中显示）
+    type: prometheus  # 数据源类型，这里为 Prometheus
+    access: proxy  # 通过 Grafana 服务器代理访问 Prometheus（推荐）
+    orgId: 1  # 所属组织的 ID，默认为 1（适用于多租户 Grafana）
+    url: http://prometheus:9090  # Prometheus 的服务地址（服务名:端口）
+    basicAuth: false  # 是否启用基本认证，这里为 false 表示不启用
+    isDefault: true  # 是否设为默认数据源（推荐设为 true，方便查询）
+    version: 1  # 配置版本号，用于配置的更新管理（通常保留为 1）
+    editable: true  # 是否允许在 Grafana UI 中编辑该数据源
